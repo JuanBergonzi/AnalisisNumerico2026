@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FrmCalculadora")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+73d2b4f5aec934dc29727eb0d23375dfcd80affe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+35834972914084bd9f9f0021447107a75c63bb95")]
 [assembly: System.Reflection.AssemblyProductAttribute("FrmCalculadora")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FrmCalculadora")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
