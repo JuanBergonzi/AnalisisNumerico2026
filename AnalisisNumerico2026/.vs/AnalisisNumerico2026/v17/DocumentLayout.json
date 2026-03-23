@@ -1,12 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\HP\\OneDrive\\Documentos\\GitHub\\AnalisisNumerico2026\\AnalisisNumerico2026\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{EDDBC1FE-C435-49C0-94B5-21A9B6BC92B3}|Calculadora\\Calculadora.csproj|c:\\users\\hp\\onedrive\\documentos\\github\\analisisnumerico2026\\analisisnumerico2026\\calculadora\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EDDBC1FE-C435-49C0-94B5-21A9B6BC92B3}|Calculadora\\Calculadora.csproj|solutionrelative:calculadora\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -14,24 +9,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\OneDrive\\Documentos\\GitHub\\AnalisisNumerico2026\\AnalisisNumerico2026\\Calculadora\\Class1.cs",
-              "RelativeDocumentMoniker": "Calculadora\\Class1.cs",
-              "ToolTip": "C:\\Users\\HP\\OneDrive\\Documentos\\GitHub\\AnalisisNumerico2026\\AnalisisNumerico2026\\Calculadora\\Class1.cs",
-              "RelativeToolTip": "Calculadora\\Class1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-18T21:40:54.201Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             }
           ]
         }
