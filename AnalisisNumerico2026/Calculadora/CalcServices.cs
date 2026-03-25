@@ -6,7 +6,7 @@ namespace Logica
     public class CalcServices : ICalcServices
     {
         Calculo AnalizadorDeFunciones = new Calculo();
-        public MetodoAbierto(string Funcion, int iteraciones, double tolerancia, double xi, double xd,string metodo)
+        public void MetodoAbierto(string Funcion, int iteraciones, double tolerancia, double xi, double xd,string metodo)
         {
             if (Funcion == null || iteraciones <= 0 || tolerancia <= 0 || xi == null || xd == null)
             {
@@ -68,8 +68,6 @@ namespace Logica
                 }
                 Console.WriteLine($"Iteraciones superadas, xr encontrada: {xr}");
             }
-
-                
         }
 
         static double CalcularXr(Calculo calc, string metodo, double xi, double xd, double tolerancia)

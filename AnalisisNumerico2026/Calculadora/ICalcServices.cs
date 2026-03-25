@@ -8,5 +8,6 @@ namespace Logica
 {
     public interface ICalcServices
     {
+        public void MetodoAbierto(string Funcion, int iteraciones, double tolerancia, double xi, double xd, string metodo);
     }
 }
