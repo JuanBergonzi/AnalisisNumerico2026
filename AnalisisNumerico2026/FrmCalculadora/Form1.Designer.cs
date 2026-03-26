@@ -48,7 +48,7 @@
             label18 = new Label();
             label19 = new Label();
             txbFuncion = new TextBox();
-            comboBox1 = new ComboBox();
+            cbxMetodo = new ComboBox();
             txbIteraciones = new TextBox();
             txbTolerancia = new TextBox();
             txbXi = new TextBox();
@@ -246,13 +246,13 @@
             txbFuncion.Size = new Size(125, 27);
             txbFuncion.TabIndex = 19;
             // 
-            // comboBox1
+            // cbxMetodo
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(97, 288);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 20;
+            cbxMetodo.FormattingEnabled = true;
+            cbxMetodo.Location = new Point(97, 288);
+            cbxMetodo.Name = "cbxMetodo";
+            cbxMetodo.Size = new Size(151, 28);
+            cbxMetodo.TabIndex = 20;
             // 
             // txbIteraciones
             // 
@@ -290,6 +290,7 @@
             btnCalcular.TabIndex = 25;
             btnCalcular.Text = "Calcular";
             btnCalcular.UseVisualStyleBackColor = true;
+            btnCalcular.Click += btnCalcular_Click;
             // 
             // txbFuncionU
             // 
@@ -374,7 +375,7 @@
             Controls.Add(txbXi);
             Controls.Add(txbTolerancia);
             Controls.Add(txbIteraciones);
-            Controls.Add(comboBox1);
+            Controls.Add(cbxMetodo);
             Controls.Add(txbFuncion);
             Controls.Add(label19);
             Controls.Add(label18);
@@ -424,7 +425,7 @@
         private Label label18;
         private Label label19;
         private TextBox txbFuncion;
-        private ComboBox comboBox1;
+        private ComboBox cbxMetodo;
         private TextBox txbIteraciones;
         private TextBox txbTolerancia;
         private TextBox txbXi;
