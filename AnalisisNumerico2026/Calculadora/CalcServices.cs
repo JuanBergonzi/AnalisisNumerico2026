@@ -26,7 +26,7 @@ namespace Logica
                 Console.WriteLine($"xi es raíz: {xi}");
                 return;
             }
-            else if (metodo == "Secante")
+            if (metodo == "Secante")
             {
                 double fxd = AnalizadorDeFunciones.EvaluaFx(xd);
 
@@ -49,7 +49,8 @@ namespace Logica
                         Console.WriteLine("El metodo diverge, No encuentra la raiz");
                         break;
                     }
-                    error = Math.Abs((xr - xrAnterior) / xr);
+                    if (xr != 0)
+                        error = Math.Abs((xr - xrAnterior) / xr);
                     if (Math.Abs(AnalizadorDeFunciones.EvaluaFx(xr)) < tolerancia || error < tolerancia)
                     {
                         Console.WriteLine($"Xr es Raíz. encontrada: {xr} en la iteración {i}");
@@ -163,7 +164,8 @@ namespace Logica
                 for (int i = 1; i <= iteraciones; i++)
                 {
                     xr = CerradoCalcularXr(AnalizadorDeFunciones, metodo, xi, xd, tolerancia);
-                    error = Math.Abs((xr - xrAnterior) / xr);
+                    if (xr != 0)
+                        error = Math.Abs((xr - xrAnterior) / xr);
                     if (Math.Abs(AnalizadorDeFunciones.EvaluaFx(xr)) < tolerancia || error < tolerancia)
                     {
                         Console.WriteLine($"Xr es Raíz. encontrada: {xr} en la iteración {i}");
