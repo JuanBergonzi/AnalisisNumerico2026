@@ -28,7 +28,6 @@ namespace Logica
                 if (double.IsNaN(xr))
                     return;
 
-                // calcular error SIEMPRE (como JS)
                 error = Math.Abs((xr - xrAnterior) / Math.Max(Math.Abs(xr), 1e-10));
 
                 double fxr = calc.EvaluaFx(xr);

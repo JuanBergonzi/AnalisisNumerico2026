@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\HP\\OneDrive\\Documentos\\GitHub\\AnalisisNumerico2026\\AnalisisNumerico2026\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EDDBC1FE-C435-49C0-94B5-21A9B6BC92B3}|Calculadora\\Logica.csproj|c:\\users\\hp\\onedrive\\documentos\\github\\analisisnumerico2026\\analisisnumerico2026\\calculadora\\calcservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EDDBC1FE-C435-49C0-94B5-21A9B6BC92B3}|Calculadora\\Logica.csproj|solutionrelative:calculadora\\calcservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{89FCE0DD-D9B4-4F6B-B232-607ACFD3C8FB}|FrmCalculadora\\FrmCalculadora.csproj|c:\\users\\hp\\onedrive\\documentos\\github\\analisisnumerico2026\\analisisnumerico2026\\frmcalculadora\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{89FCE0DD-D9B4-4F6B-B232-607ACFD3C8FB}|FrmCalculadora\\FrmCalculadora.csproj|solutionrelative:frmcalculadora\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{89FCE0DD-D9B4-4F6B-B232-607ACFD3C8FB}|FrmCalculadora\\FrmCalculadora.csproj|c:\\users\\hp\\onedrive\\documentos\\github\\analisisnumerico2026\\analisisnumerico2026\\frmcalculadora\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{89FCE0DD-D9B4-4F6B-B232-607ACFD3C8FB}|FrmCalculadora\\FrmCalculadora.csproj|solutionrelative:frmcalculadora\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{89FCE0DD-D9B4-4F6B-B232-607ACFD3C8FB}|FrmCalculadora\\FrmCalculadora.csproj|C:\\Users\\HP\\OneDrive\\Documentos\\GitHub\\AnalisisNumerico2026\\AnalisisNumerico2026\\frmcalculadora\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{89FCE0DD-D9B4-4F6B-B232-607ACFD3C8FB}|FrmCalculadora\\FrmCalculadora.csproj|solutionrelative:frmcalculadora\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{EDDBC1FE-C435-49C0-94B5-21A9B6BC92B3}|Calculadora\\Logica.csproj|c:\\users\\hp\\onedrive\\documentos\\github\\analisisnumerico2026\\analisisnumerico2026\\calculadora\\calcservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDDBC1FE-C435-49C0-94B5-21A9B6BC92B3}|Calculadora\\Logica.csproj|solutionrelative:calculadora\\calcservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EDDBC1FE-C435-49C0-94B5-21A9B6BC92B3}|Calculadora\\Logica.csproj|c:\\users\\hp\\onedrive\\documentos\\github\\analisisnumerico2026\\analisisnumerico2026\\calculadora\\icalcservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,11 +26,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\HP\\OneDrive\\Documentos\\GitHub\\AnalisisNumerico2026\\AnalisisNumerico2026\\FrmCalculadora\\Form1.cs",
+              "RelativeDocumentMoniker": "FrmCalculadora\\Form1.cs",
+              "ToolTip": "C:\\Users\\HP\\OneDrive\\Documentos\\GitHub\\AnalisisNumerico2026\\AnalisisNumerico2026\\FrmCalculadora\\Form1.cs [Dise\u00F1o]",
+              "RelativeToolTip": "FrmCalculadora\\Form1.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-27T23:18:33.624Z",
+              "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
@@ -47,17 +59,6 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Form1.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\HP\\OneDrive\\Documentos\\GitHub\\AnalisisNumerico2026\\AnalisisNumerico2026\\FrmCalculadora\\Form1.cs",
-              "RelativeDocumentMoniker": "FrmCalculadora\\Form1.cs",
-              "ToolTip": "C:\\Users\\HP\\OneDrive\\Documentos\\GitHub\\AnalisisNumerico2026\\AnalisisNumerico2026\\FrmCalculadora\\Form1.cs [Dise\u00F1o]",
-              "RelativeToolTip": "FrmCalculadora\\Form1.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-27T20:01:44.824Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
               "Title": "ICalcServices.cs",
               "DocumentMoniker": "C:\\Users\\HP\\OneDrive\\Documentos\\GitHub\\AnalisisNumerico2026\\AnalisisNumerico2026\\Calculadora\\ICalcServices.cs",
@@ -70,13 +71,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "CalcServices.cs",
               "DocumentMoniker": "C:\\Users\\HP\\OneDrive\\Documentos\\GitHub\\AnalisisNumerico2026\\AnalisisNumerico2026\\Calculadora\\CalcServices.cs",
               "RelativeDocumentMoniker": "Calculadora\\CalcServices.cs",
               "ToolTip": "C:\\Users\\HP\\OneDrive\\Documentos\\GitHub\\AnalisisNumerico2026\\AnalisisNumerico2026\\Calculadora\\CalcServices.cs",
               "RelativeToolTip": "Calculadora\\CalcServices.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAABiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEwAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-23T14:09:46.727Z",
               "EditorCaption": ""
