@@ -1,11 +1,11 @@
 ﻿using Calculus;
-using System.Runtime.Serialization.Formatters;
 
 namespace Logica
 {
     public class CalcServices : ICalcServices
     {
-        public void MetodoAbierto(string Funcion, int iteraciones, double tolerancia, double xi, double xd, string metodo, out bool converge, out double raiz, out double error, out string intervalo, out int iteracionesRealizadas)
+        public void MetodoAbierto(string Funcion, int iteraciones, double tolerancia, double xi, double xd, string metodo,
+            out bool converge, out double raiz, out double error, out string intervalo, out int iteracionesRealizadas)
         {
             converge = false;
             raiz = 0;
@@ -13,21 +13,29 @@ namespace Logica
             intervalo = "";
             iteracionesRealizadas = 0;
 
-            double xr = 0;
-            double xrAnterior = 0;
-
             Calculo calc = new Calculo();
+
             if (!calc.Sintaxis(Funcion, 'x'))
                 return;
 
+            double xr = xi;
+            double xrAnterior = xi;
+
             for (int i = 1; i <= iteraciones; i++)
             {
-                xr = CalcularXr(calc, metodo, xi, xd, tolerancia);
+                xr = CalcularXr(calc, metodo, xi, xd);
 
-                if (xr != 0)
-                    error = Math.Abs((xr - xrAnterior) / xr);
+                if (double.IsNaN(xr))
+                    return;
 
-                if (Math.Abs(calc.EvaluaFx(xr)) < tolerancia || error < tolerancia)
+                // calcular error SIEMPRE (como JS)
+                error = Math.Abs((xr - xrAnterior) / Math.Max(Math.Abs(xr), 1e-10));
+
+                double fxr = calc.EvaluaFx(xr);
+
+                System.Diagnostics.Debug.WriteLine($"Iter: {i} Error: {error} Tol: {tolerancia}");
+
+                if (Math.Abs(fxr) < tolerancia || error < tolerancia)
                 {
                     converge = true;
                     raiz = xr;
@@ -37,8 +45,10 @@ namespace Logica
                 }
 
                 if (metodo == "Tangente")
+                {
                     xi = xr;
-                else
+                }
+                else // Secante
                 {
                     xi = xd;
                     xd = xr;
@@ -50,63 +60,37 @@ namespace Logica
             raiz = xr;
             intervalo = $"{xi} | {xd}";
             iteracionesRealizadas = iteraciones;
+            
         }
 
-        static double CalcularXr(Calculo calc, string metodo, double xi, double xd, double tolerancia)
-    {
-        if (metodo == "Tangente") // Newton-Raphson
+        static double CalcularXr(Calculo calc, string metodo, double xi, double xd)
         {
-            double derivada = calc.Dx(xi);
-
-            if (Math.Abs(derivada) < tolerancia || double.IsNaN(derivada))
+            if (metodo == "Tangente")
             {
-                Console.WriteLine("Derivada inválida → diverge");
-                return double.NaN;
+                double fxi = calc.EvaluaFx(xi);
+                double derivada = calc.Dx(xi);
+
+                if (derivada == 0 || double.IsNaN(derivada))
+                    return double.NaN;
+
+                return xi - (fxi / derivada);
             }
-
-            return xi - (calc.EvaluaFx(xi) / derivada);
-        }
-        else // Secante
-        {
-            double fxi = calc.EvaluaFx(xi);
-            double fxd = calc.EvaluaFx(xd);
-
-            double denominador = fxd - fxi;
-
-            if (denominador == 0)
-            {
-                Console.WriteLine("División por cero → diverge");
-                return double.NaN;
-            }
-
-            return (fxd * xi - fxi * xd) / denominador;
-        }
-    }
-        static double CerradoCalcularXr(Calculo calc, string metodo, double xi, double xd, double tolerancia)
-        {
-            if (metodo == "Bisección")
-            {
-                return (xi + xd) / 2;
-            }
-            else if (metodo == "Regla Falsa")
+            else // Secante
             {
                 double fxi = calc.EvaluaFx(xi);
                 double fxd = calc.EvaluaFx(xd);
+
                 double denominador = fxd - fxi;
+
                 if (denominador == 0)
-                {
-                    Console.WriteLine("División por cero → diverge");
                     return double.NaN;
-                }
+
                 return (fxd * xi - fxi * xd) / denominador;
-            }
-            else
-            {
-                throw new ArgumentException("Método cerrado no reconocido.");
             }
         }
 
-        public void MetodoCerrado(string Funcion, int iteraciones, double tolerancia, double xi, double xd, string metodo, out bool converge, out double raiz, out double error, out string intervalo, out int iteracionesRealizadas)
+        public void MetodoCerrado(string Funcion, int iteraciones, double tolerancia, double xi, double xd, string metodo,
+            out bool converge, out double raiz, out double error, out string intervalo, out int iteracionesRealizadas)
         {
             converge = false;
             raiz = 0;
@@ -114,14 +98,7 @@ namespace Logica
             intervalo = "";
             iteracionesRealizadas = 0;
 
-            double xr = 0;
-            double xrAnterior = 0;
-
             Calculo calc = new Calculo();
-
-            // Validaciones
-            if (Funcion == null || iteraciones <= 0 || tolerancia <= 0 || double.IsNaN(xi) || double.IsNaN(xd))
-                return;
 
             if (!calc.Sintaxis(Funcion, 'x'))
                 return;
@@ -129,47 +106,33 @@ namespace Logica
             double fxi = calc.EvaluaFx(xi);
             double fxd = calc.EvaluaFx(xd);
 
-            // Validación de intervalo
             if (fxi * fxd > 0)
                 return;
 
-            if (fxi == 0)
-            {
-                converge = true;
-                raiz = xi;
-                intervalo = $"{xi} | {xd}";
-                iteracionesRealizadas = 0;
-                return;
-            }
+            double xr = 0;
 
-            if (fxd == 0)
-            {
-                converge = true;
-                raiz = xd;
-                intervalo = $"{xi} | {xd}";
-                iteracionesRealizadas = 0;
-                return;
-            }
-
-            // Iteraciones
             for (int i = 1; i <= iteraciones; i++)
             {
-                xr = CerradoCalcularXr(calc, metodo, xi, xd, tolerancia);
+                if (metodo == "Bisección")
+                    xr = (xi + xd) / 2;
+                else // Regla Falsa
+                {
+                    double denominador = fxd - fxi;
+                    if (denominador == 0) return;
 
-                if (xr != 0)
-                    error = Math.Abs((xr - xrAnterior) / xr);
+                    xr = (fxd * xi - fxi * xd) / denominador;
+                }
 
                 double fxr = calc.EvaluaFx(xr);
 
-                double errorIntervalo = Math.Abs(xd - xi) / 2;
+                error = Math.Abs(xd - xi) / 2;
 
-                if (errorIntervalo < tolerancia)
+                if (error < tolerancia || Math.Abs(fxr) < tolerancia)
                 {
                     converge = true;
                     raiz = xr;
                     intervalo = $"{xi} | {xd}";
                     iteracionesRealizadas = i;
-                    error = errorIntervalo;
                     return;
                 }
 
@@ -183,11 +146,8 @@ namespace Logica
                     xd = xr;
                     fxd = fxr;
                 }
-
-                xrAnterior = xr;
             }
 
-            // Si no converge
             raiz = xr;
             intervalo = $"{xi} | {xd}";
             iteracionesRealizadas = iteraciones;

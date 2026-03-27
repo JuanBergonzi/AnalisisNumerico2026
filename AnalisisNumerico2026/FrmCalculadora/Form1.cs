@@ -70,6 +70,7 @@ namespace FrmCalculadora
                 txbRaiz.Text = raiz.ToString();
                 txbError.Text = error.ToString();
                 txbIntervaloU.Text = intervalo;
+
             }
             catch (Exception ex)
             {
@@ -97,6 +98,8 @@ namespace FrmCalculadora
             // Selecciona el primero automáticamente (opcional pero recomendable)
             if (cbMetodo.Items.Count > 0)
                 cbMetodo.SelectedIndex = 0;
+
+
         }
     }
 }

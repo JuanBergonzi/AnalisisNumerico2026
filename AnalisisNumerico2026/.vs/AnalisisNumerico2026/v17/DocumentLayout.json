@@ -11,7 +11,7 @@
       "RelativeMoniker": "D:0:0:{89FCE0DD-D9B4-4F6B-B232-607ACFD3C8FB}|FrmCalculadora\\FrmCalculadora.csproj|solutionrelative:frmcalculadora\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{89FCE0DD-D9B4-4F6B-B232-607ACFD3C8FB}|FrmCalculadora\\FrmCalculadora.csproj|c:\\users\\hp\\onedrive\\documentos\\github\\analisisnumerico2026\\analisisnumerico2026\\frmcalculadora\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{89FCE0DD-D9B4-4F6B-B232-607ACFD3C8FB}|FrmCalculadora\\FrmCalculadora.csproj|C:\\Users\\HP\\OneDrive\\Documentos\\GitHub\\AnalisisNumerico2026\\AnalisisNumerico2026\\frmcalculadora\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{89FCE0DD-D9B4-4F6B-B232-607ACFD3C8FB}|FrmCalculadora\\FrmCalculadora.csproj|solutionrelative:frmcalculadora\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -40,7 +40,7 @@
               "RelativeDocumentMoniker": "FrmCalculadora\\Form1.cs",
               "ToolTip": "C:\\Users\\HP\\OneDrive\\Documentos\\GitHub\\AnalisisNumerico2026\\AnalisisNumerico2026\\FrmCalculadora\\Form1.cs",
               "RelativeToolTip": "FrmCalculadora\\Form1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAAwGUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-27T20:03:37.765Z",
               "EditorCaption": ""
@@ -54,8 +54,7 @@
               "ToolTip": "C:\\Users\\HP\\OneDrive\\Documentos\\GitHub\\AnalisisNumerico2026\\AnalisisNumerico2026\\FrmCalculadora\\Form1.cs [Dise\u00F1o]",
               "RelativeToolTip": "FrmCalculadora\\Form1.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-27T20:01:44.824Z",
-              "EditorCaption": " [Dise\u00F1o]"
+              "WhenOpened": "2026-03-27T20:01:44.824Z"
             },
             {
               "$type": "Document",
@@ -67,8 +66,7 @@
               "RelativeToolTip": "Calculadora\\ICalcServices.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAADkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-26T20:31:35.081Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-26T20:31:35.081Z"
             },
             {
               "$type": "Document",
@@ -78,7 +76,7 @@
               "RelativeDocumentMoniker": "Calculadora\\CalcServices.cs",
               "ToolTip": "C:\\Users\\HP\\OneDrive\\Documentos\\GitHub\\AnalisisNumerico2026\\AnalisisNumerico2026\\Calculadora\\CalcServices.cs",
               "RelativeToolTip": "Calculadora\\CalcServices.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAxwBQAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAABkAAAAAAAAAAAAQwCMAAABiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-23T14:09:46.727Z",
               "EditorCaption": ""
