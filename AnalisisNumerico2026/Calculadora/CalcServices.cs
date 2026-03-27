@@ -106,66 +106,91 @@ namespace Logica
             }
         }
 
-        public void MetodoCerrado(string Funcion, int iteraciones, double tolerancia, double xi, double xd, string metodo)
+        public void MetodoCerrado(string Funcion, int iteraciones, double tolerancia, double xi, double xd, string metodo, out bool converge, out double raiz, out double error, out string intervalo, out int iteracionesRealizadas)
         {
+            converge = false;
+            raiz = 0;
+            error = 0;
+            intervalo = "";
+            iteracionesRealizadas = 0;
+
+            double xr = 0;
+            double xrAnterior = 0;
+
             Calculo calc = new Calculo();
 
+            // Validaciones
             if (Funcion == null || iteraciones <= 0 || tolerancia <= 0 || double.IsNaN(xi) || double.IsNaN(xd))
-            {
-                throw new ArgumentException("Los parámetros no pueden ser nulos o inválidos.");
-            }
+                return;
 
             if (!calc.Sintaxis(Funcion, 'x'))
+                return;
+
+            double fxi = calc.EvaluaFx(xi);
+            double fxd = calc.EvaluaFx(xd);
+
+            // Validación de intervalo
+            if (fxi * fxd > 0)
+                return;
+
+            if (fxi == 0)
             {
-                Console.WriteLine("Error: función inválida");
+                converge = true;
+                raiz = xi;
+                intervalo = $"{xi} | {xd}";
+                iteracionesRealizadas = 0;
                 return;
             }
 
-            if (calc.EvaluaFx(xi)* calc.EvaluaFx(xd) > 0)
+            if (fxd == 0)
             {
-                Console.WriteLine("Error: Volver a ingresar Xd, Xi");
+                converge = true;
+                raiz = xd;
+                intervalo = $"{xi} | {xd}";
+                iteracionesRealizadas = 0;
                 return;
             }
-            else if (calc.EvaluaFx(xi) * calc.EvaluaFx(xd) == 0)
+
+            // Iteraciones
+            for (int i = 1; i <= iteraciones; i++)
             {
-                if (calc.EvaluaFx(xi) == 0)
+                xr = CerradoCalcularXr(calc, metodo, xi, xd, tolerancia);
+
+                if (xr != 0)
+                    error = Math.Abs((xr - xrAnterior) / xr);
+
+                double fxr = calc.EvaluaFx(xr);
+
+                double errorIntervalo = Math.Abs(xd - xi) / 2;
+
+                if (errorIntervalo < tolerancia)
                 {
-                    Console.WriteLine("Xi es raiz");
+                    converge = true;
+                    raiz = xr;
+                    intervalo = $"{xi} | {xd}";
+                    iteracionesRealizadas = i;
+                    error = errorIntervalo;
                     return;
+                }
+
+                if (fxi * fxr > 0)
+                {
+                    xi = xr;
+                    fxi = fxr;
                 }
                 else
                 {
-                    Console.WriteLine("Xd es raiz");
-                    return;
+                    xd = xr;
+                    fxd = fxr;
                 }
+
+                xrAnterior = xr;
             }
-            else
-            {
-                double xr = 0;
-                double xrAnterior = 0;
-                double error = 0;
-                for (int i = 1; i <= iteraciones; i++)
-                {
-                    xr = CerradoCalcularXr(calc, metodo, xi, xd, tolerancia);
-                    if (xr != 0)
-                        error = Math.Abs((xr - xrAnterior) / xr);
-                    if (Math.Abs(calc.EvaluaFx(xr)) < tolerancia || error < tolerancia)
-                    {
-                        Console.WriteLine($"Xr es Raíz. encontrada: {xr} en la iteración {i}");
-                        break;
-                    }
-                    else if (calc.EvaluaFx(xi) * calc.EvaluaFx(xr) > 0)
-                    {
-                        xi = xr;
-                    }
-                    else
-                    {
-                        xd = xr;
-                    }
-                    xrAnterior = xr;
-                }
-                Console.WriteLine($"Iteraciones superadas, xr encontrada: {xr}");
-            }
+
+            // Si no converge
+            raiz = xr;
+            intervalo = $"{xi} | {xd}";
+            iteracionesRealizadas = iteraciones;
         }
     }
 }
