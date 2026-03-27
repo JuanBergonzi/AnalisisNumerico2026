@@ -71,6 +71,12 @@ namespace FrmCalculadora
                 txbError.Text = error.ToString();
                 txbIntervaloU.Text = intervalo;
 
+                webView21.ExecuteScriptAsync("ggbApplet.reset()");
+
+                webView21.ExecuteScriptAsync($"ggbApplet.evalCommand('f(x) = {txbFuncion.Text}')");
+
+                webView21.ExecuteScriptAsync($"ggbApplet.evalCommand('A = ({raiz}, f({raiz}))')");
+
             }
             catch (Exception ex)
             {
@@ -100,6 +106,13 @@ namespace FrmCalculadora
                 cbMetodo.SelectedIndex = 0;
 
 
+        }
+
+        private async void Form1_Load(object sender, EventArgs e)
+        {
+            await webView21.EnsureCoreWebView2Async();
+
+            webView21.CoreWebView2.Navigate("https://www.geogebra.org/graphing");
         }
     }
 }

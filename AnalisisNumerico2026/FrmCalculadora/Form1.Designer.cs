@@ -62,10 +62,10 @@
             txbConverge = new TextBox();
             txbRaiz = new TextBox();
             txbError = new TextBox();
-            pictureBox1 = new PictureBox();
             cmMet = new ComboBox();
             label20 = new Label();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
+            ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -89,7 +89,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(485, 141);
+            label3.Location = new Point(463, 141);
             label3.Name = "label3";
             label3.Size = new Size(57, 20);
             label3.TabIndex = 2;
@@ -351,14 +351,6 @@
             txbError.Size = new Size(125, 27);
             txbError.TabIndex = 33;
             // 
-            // pictureBox1
-            // 
-            pictureBox1.Location = new Point(351, 220);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(343, 301);
-            pictureBox1.TabIndex = 34;
-            pictureBox1.TabStop = false;
-            // 
             // cmMet
             // 
             cmMet.FormattingEnabled = true;
@@ -379,14 +371,25 @@
             label20.TabIndex = 36;
             label20.Text = "Metodo";
             // 
+            // webView21
+            // 
+            webView21.AllowExternalDrop = true;
+            webView21.CreationProperties = null;
+            webView21.DefaultBackgroundColor = Color.White;
+            webView21.Location = new Point(333, 203);
+            webView21.Name = "webView21";
+            webView21.Size = new Size(349, 308);
+            webView21.TabIndex = 37;
+            webView21.ZoomFactor = 1D;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1064, 708);
+            Controls.Add(webView21);
             Controls.Add(label20);
             Controls.Add(cmMet);
-            Controls.Add(pictureBox1);
             Controls.Add(txbError);
             Controls.Add(txbRaiz);
             Controls.Add(txbConverge);
@@ -423,7 +426,8 @@
             Controls.Add(label1);
             Name = "Form1";
             Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)webView21).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -464,8 +468,8 @@
         private TextBox txbConverge;
         private TextBox txbRaiz;
         private TextBox txbError;
-        private PictureBox pictureBox1;
         private ComboBox cmMet;
         private Label label20;
+        private Microsoft.Web.WebView2.WinForms.WebView2 webView21;
     }
 }
