@@ -5,70 +5,51 @@ namespace Logica
 {
     public class CalcServices : ICalcServices
     {
-        Calculo AnalizadorDeFunciones = new Calculo();
-        public void MetodoAbierto(string Funcion, int iteraciones, double tolerancia, double xi, double xd,string metodo)
+        public void MetodoAbierto(string Funcion, int iteraciones, double tolerancia, double xi, double xd, string metodo, out bool converge, out double raiz, out double error, out string intervalo, out int iteracionesRealizadas)
         {
-            if (Funcion == null || iteraciones <= 0 || tolerancia <= 0 || double.IsNaN(xi) || double.IsNaN(xd))
-            {
-                throw new ArgumentException("Los parámetros no pueden ser nulos o inválidos.");
-            }
+            converge = false;
+            raiz = 0;
+            error = 0;
+            intervalo = "";
+            iteracionesRealizadas = 0;
 
-            if (!AnalizadorDeFunciones.Sintaxis(Funcion,'x'))
-            {
-                Console.WriteLine("Error: función inválida");
-                return;               
-            }
+            double xr = 0;
+            double xrAnterior = 0;
 
-            double fxi = AnalizadorDeFunciones.EvaluaFx(xi);
-
-            if (Math.Abs(fxi) < tolerancia)
-            {
-                Console.WriteLine($"xi es raíz: {xi}");
+            Calculo calc = new Calculo();
+            if (!calc.Sintaxis(Funcion, 'x'))
                 return;
-            }
-            if (metodo == "Secante")
-            {
-                double fxd = AnalizadorDeFunciones.EvaluaFx(xd);
 
-                if (Math.Abs(fxd) < tolerancia)
+            for (int i = 1; i <= iteraciones; i++)
+            {
+                xr = CalcularXr(calc, metodo, xi, xd, tolerancia);
+
+                if (xr != 0)
+                    error = Math.Abs((xr - xrAnterior) / xr);
+
+                if (Math.Abs(calc.EvaluaFx(xr)) < tolerancia || error < tolerancia)
                 {
-                    Console.WriteLine($"xd es raíz: {xd}");
+                    converge = true;
+                    raiz = xr;
+                    intervalo = $"{xi} | {xd}";
+                    iteracionesRealizadas = i;
                     return;
                 }
-            }
-            else
-            {
-                double xr = 0;
-                double xrAnterior = 0;
-                double error = 0;
-                for (int i = 1; i <= iteraciones; i++)
+
+                if (metodo == "Tangente")
+                    xi = xr;
+                else
                 {
-                    xr = CalcularXr(AnalizadorDeFunciones, metodo, xi, xd, tolerancia);
-                    if (double.IsNaN(xr))
-                    {
-                        Console.WriteLine("El metodo diverge, No encuentra la raiz");
-                        break;
-                    }
-                    if (xr != 0)
-                        error = Math.Abs((xr - xrAnterior) / xr);
-                    if (Math.Abs(AnalizadorDeFunciones.EvaluaFx(xr)) < tolerancia || error < tolerancia)
-                    {
-                        Console.WriteLine($"Xr es Raíz. encontrada: {xr} en la iteración {i}");
-                        break;
-                    }
-                    else if (metodo == "Tangente")
-                    {
-                        xi = xr;
-                    }
-                    else
-                    {
-                        xi = xd;
-                        xd = xr;
-                    }
-                    xrAnterior = xr;
+                    xi = xd;
+                    xd = xr;
                 }
-                Console.WriteLine($"Iteraciones superadas, xr encontrada: {xr}");
+
+                xrAnterior = xr;
             }
+
+            raiz = xr;
+            intervalo = $"{xi} | {xd}";
+            iteracionesRealizadas = iteraciones;
         }
 
         static double CalcularXr(Calculo calc, string metodo, double xi, double xd, double tolerancia)
@@ -127,25 +108,27 @@ namespace Logica
 
         public void MetodoCerrado(string Funcion, int iteraciones, double tolerancia, double xi, double xd, string metodo)
         {
+            Calculo calc = new Calculo();
+
             if (Funcion == null || iteraciones <= 0 || tolerancia <= 0 || double.IsNaN(xi) || double.IsNaN(xd))
             {
                 throw new ArgumentException("Los parámetros no pueden ser nulos o inválidos.");
             }
 
-            if (!AnalizadorDeFunciones.Sintaxis(Funcion, 'x'))
+            if (!calc.Sintaxis(Funcion, 'x'))
             {
                 Console.WriteLine("Error: función inválida");
                 return;
             }
 
-            if (AnalizadorDeFunciones.EvaluaFx(xi)* AnalizadorDeFunciones.EvaluaFx(xd) > 0)
+            if (calc.EvaluaFx(xi)* calc.EvaluaFx(xd) > 0)
             {
                 Console.WriteLine("Error: Volver a ingresar Xd, Xi");
                 return;
             }
-            else if (AnalizadorDeFunciones.EvaluaFx(xi) * AnalizadorDeFunciones.EvaluaFx(xd) == 0)
+            else if (calc.EvaluaFx(xi) * calc.EvaluaFx(xd) == 0)
             {
-                if (AnalizadorDeFunciones.EvaluaFx(xi) == 0)
+                if (calc.EvaluaFx(xi) == 0)
                 {
                     Console.WriteLine("Xi es raiz");
                     return;
@@ -163,15 +146,15 @@ namespace Logica
                 double error = 0;
                 for (int i = 1; i <= iteraciones; i++)
                 {
-                    xr = CerradoCalcularXr(AnalizadorDeFunciones, metodo, xi, xd, tolerancia);
+                    xr = CerradoCalcularXr(calc, metodo, xi, xd, tolerancia);
                     if (xr != 0)
                         error = Math.Abs((xr - xrAnterior) / xr);
-                    if (Math.Abs(AnalizadorDeFunciones.EvaluaFx(xr)) < tolerancia || error < tolerancia)
+                    if (Math.Abs(calc.EvaluaFx(xr)) < tolerancia || error < tolerancia)
                     {
                         Console.WriteLine($"Xr es Raíz. encontrada: {xr} en la iteración {i}");
                         break;
                     }
-                    else if (AnalizadorDeFunciones.EvaluaFx(xi) * AnalizadorDeFunciones.EvaluaFx(xr) > 0)
+                    else if (calc.EvaluaFx(xi) * calc.EvaluaFx(xr) > 0)
                     {
                         xi = xr;
                     }

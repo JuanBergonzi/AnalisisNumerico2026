@@ -12,4 +12,10 @@
     <ProjectReference Include="..\Calculadora\Logica.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Calculus">
+      <HintPath>..\..\Calculus-C-dll-and-Java-Android--master\Calculus-C-dll-and-Java-Android--master\Calculus.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
