@@ -112,7 +112,8 @@ namespace FrmCalculadora
         {
             await webView21.EnsureCoreWebView2Async();
 
-            webView21.CoreWebView2.Navigate("https://www.geogebra.org/graphing");
+            string htmlPath = Path.Combine(Application.StartupPath, "geogebra.html");
+            webView21.CoreWebView2.Navigate($"file:///{htmlPath}");
         }
     }
 }

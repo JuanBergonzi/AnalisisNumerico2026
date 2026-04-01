@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="ggb-element"></div>
+
+    <script>
+        var params = {
+            appName: "graphing",
+            width: window.innerWidth,
+            height: window.innerHeight,
+
+            showToolBar: false,
+            showAlgebraInput: false,
+            showMenuBar: false,
+            showAlgebraView: false,
+            showZoomButtons: false,
+            showResetIcon: false,
+
+            enableRightClick: false,
+
+            appletOnLoad: function(api) {
+                window.ggbApplet = api; // IMPORTANTE para usar desde C#
+                api.setPerspective("G");
+            }
+        };
+
+        var applet = new GGBApplet(params, true);
+        window.addEventListener("load", function () {
+            applet.inject('ggb-element');
+        });
+    </script>
+</body>
+</html>
