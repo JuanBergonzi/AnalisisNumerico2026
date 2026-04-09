@@ -273,6 +273,7 @@
             pictureBox1.Size = new Size(240, 229);
             pictureBox1.TabIndex = 28;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // txbError
             // 

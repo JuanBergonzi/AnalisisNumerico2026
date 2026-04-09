@@ -1,11 +1,13 @@
 using Calculus;
 using Logica;
+using WMPLib;
 namespace FrmCalculadora
 {
     public partial class Form1 : Form
     {
         ICalcServices _calcServices = new CalcServices();
-
+        WindowsMediaPlayer player = new WindowsMediaPlayer();
+        bool musicaActiva = false;
         public Form1()
         {
             InitializeComponent();
@@ -21,8 +23,7 @@ namespace FrmCalculadora
                 string intervalo;
                 int iteracionesRealizadas;
 
-                string tipoMetodo = cmMet.Text; // "Abierto" o "Cerrado"
-
+                string tipoMetodo = cmMet.Text; 
                 if (tipoMetodo == "Abierto")
                 {
                     _calcServices.MetodoAbierto(
@@ -61,7 +62,6 @@ namespace FrmCalculadora
                     return;
                 }
 
-                // Mostrar resultados
                 txbIteracionesU.Text = iteracionesRealizadas.ToString();
                 txbConverge.Text = converge ? "SI" : "NO";
                 txbRaiz.Text = raiz.ToString();
@@ -98,7 +98,6 @@ namespace FrmCalculadora
                 cbMetodo.Items.Add("Secante");
             }
 
-            // Selecciona el primero automáticamente (opcional pero recomendable)
             if (cbMetodo.Items.Count > 0)
                 cbMetodo.SelectedIndex = 0;
 
@@ -112,6 +111,11 @@ namespace FrmCalculadora
 
             string htmlPath = Path.Combine(Application.StartupPath, "geogebra.html");
             webView21.CoreWebView2.Navigate($"file:///{htmlPath}");
+
+            player.URL = Path.Combine(Application.StartupPath, "musica.mp3");
+            player.settings.setMode("loop", true);
+
+
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -120,10 +124,8 @@ namespace FrmCalculadora
 
             Graphics g = e.Graphics;
 
-            // Fondo blanco
             g.Clear(Color.White);
 
-            // Franja roja invertida
             using (Brush rojo = new SolidBrush(Color.FromArgb(200, 0, 0)))
             {
                 Point[] franja =
@@ -138,6 +140,18 @@ namespace FrmCalculadora
             }
         }
 
-
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (!musicaActiva)
+            {
+                player.controls.play();
+                musicaActiva = true;
+            }
+            else
+            {
+                player.controls.stop();
+                musicaActiva = false;
+            }
+        }
     }
 }
