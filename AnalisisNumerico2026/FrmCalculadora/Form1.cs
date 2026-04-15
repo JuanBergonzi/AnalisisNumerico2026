@@ -114,8 +114,6 @@ namespace FrmCalculadora
 
             player.URL = Path.Combine(Application.StartupPath, "musica.mp3");
             player.settings.setMode("loop", true);
-            player.controls.stop();
-            musicaActiva = false;
 
 
         }
