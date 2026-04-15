@@ -5,7 +5,6 @@ namespace FrmCalculadora
     public partial class Form1 : Form
     {
         ICalcServices _calcServices = new CalcServices();
-
         public Form1()
         {
             InitializeComponent();
@@ -62,7 +61,11 @@ namespace FrmCalculadora
                 }
 
                 // Mostrar resultados
+                txbFuncionU.Text = txbFuncion.Text;
+                txbMetodoU.Text = cbMetodo.Text;
                 txbIteracionesU.Text = iteracionesRealizadas.ToString();
+                txbToleranciaU.Text = txbTolerancia.Text;
+
                 txbConverge.Text = converge ? "SI" : "NO";
                 txbRaiz.Text = raiz.ToString();
                 txbError.Text = error.ToString();
@@ -105,7 +108,6 @@ namespace FrmCalculadora
 
         }
 
-
         private async void Form1_Load(object sender, EventArgs e)
         {
             await webView21.EnsureCoreWebView2Async();
@@ -113,31 +115,5 @@ namespace FrmCalculadora
             string htmlPath = Path.Combine(Application.StartupPath, "geogebra.html");
             webView21.CoreWebView2.Navigate($"file:///{htmlPath}");
         }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-
-            Graphics g = e.Graphics;
-
-            // Fondo blanco
-            g.Clear(Color.White);
-
-            // Franja roja invertida
-            using (Brush rojo = new SolidBrush(Color.FromArgb(200, 0, 0)))
-            {
-                Point[] franja =
-                {
-            new Point(this.Width - 200, 0),
-            new Point(this.Width + 100, 0),
-            new Point(100, this.Height),
-            new Point(-200, this.Height)
-                };
-
-                g.FillPolygon(rojo, franja);
-            }
-        }
-
-
     }
 }
