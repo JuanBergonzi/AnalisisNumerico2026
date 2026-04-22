@@ -61,10 +61,7 @@ namespace FrmCalculadora
                 }
 
                 // Mostrar resultados
-                txbFuncionU.Text = txbFuncion.Text;
-                txbMetodoU.Text = cbMetodo.Text;
                 txbIteracionesU.Text = iteracionesRealizadas.ToString();
-                txbToleranciaU.Text = txbTolerancia.Text;
 
                 txbConverge.Text = converge ? "SI" : "NO";
                 txbRaiz.Text = raiz.ToString();

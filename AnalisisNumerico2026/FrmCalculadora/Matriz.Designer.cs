@@ -146,6 +146,7 @@
             tbTolerancia.Name = "tbTolerancia";
             tbTolerancia.Size = new Size(178, 23);
             tbTolerancia.TabIndex = 3;
+            tbTolerancia.Text = "0,0001";
             // 
             // tbIteraciones
             // 
