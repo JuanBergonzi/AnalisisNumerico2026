@@ -1,10 +1,12 @@
 using Calculus;
 using Logica;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 namespace FrmCalculadora
 {
     public partial class Raices : Form
     {
         ICalcServices _calcServices = new CalcServices();
+
         public Raices()
         {
             InitializeComponent();
@@ -14,69 +16,67 @@ namespace FrmCalculadora
         {
             try
             {
-                bool converge;
-                double raiz;
-                double error;
-                string intervalo;
-                int iteracionesRealizadas;
-
-                string tipoMetodo = cmMet.Text; // "Abierto" o "Cerrado"
-
-                if (tipoMetodo == "Abierto")
                 {
-                    _calcServices.MetodoAbierto(
-                        txbFuncion.Text,
-                        int.Parse(txbIteraciones.Text),
-                        double.Parse(txbTolerancia.Text),
-                        double.Parse(txbXi.Text),
-                        double.Parse(txbXd.Text),
-                        cbMetodo.Text,
-                        out converge,
-                        out raiz,
-                        out error,
-                        out intervalo,
-                        out iteracionesRealizadas
-                    );
+                    bool converge;
+                    double raiz;
+                    double error;
+                    string intervalo;
+                    int iteracionesRealizadas;
+
+                    string tipoMetodo = cmMet.Text; // "Abierto" o "Cerrado"
+
+                    if (tipoMetodo == "Abierto")
+                    {
+                        _calcServices.MetodoAbierto(
+                            txbFuncion.Text,
+                            int.Parse(txbIteraciones.Text),
+                            double.Parse(txbTolerancia.Text),
+                            double.Parse(txbXi.Text),
+                            double.Parse(txbXd.Text),
+                            cbMetodo.Text,
+                            out converge,
+                            out raiz,
+                            out error,
+                            out intervalo,
+                            out iteracionesRealizadas
+                        );
+                    }
+                    else if (tipoMetodo == "Cerrado")
+                    {
+                        _calcServices.MetodoCerrado(
+                            txbFuncion.Text,
+                            int.Parse(txbIteraciones.Text),
+                            double.Parse(txbTolerancia.Text),
+                            double.Parse(txbXi.Text),
+                            double.Parse(txbXd.Text),
+                            cbMetodo.Text,
+                            out converge,
+                            out raiz,
+                            out error,
+                            out intervalo,
+                            out iteracionesRealizadas
+                        );
+                    }
+                    else
+                    {
+                        MessageBox.Show("Seleccioná un tipo de método (Abierto o Cerrado)");
+                        return;
+                    }
+
+                    // Mostrar resultados
+                    txbIteracionesU.Text = iteracionesRealizadas.ToString();
+                    txbConverge.Text = converge ? "SI" : "NO";
+                    txbRaiz.Text = raiz.ToString();
+                    txbError.Text = error.ToString();
+                    txbIntervaloU.Text = intervalo;
+
+                    webView21.ExecuteScriptAsync("ggbApplet.reset()");
+
+                    webView21.ExecuteScriptAsync($"ggbApplet.evalCommand('f(x) = {txbFuncion.Text}')");
+
+                    webView21.ExecuteScriptAsync($"ggbApplet.evalCommand('A = ({raiz}, f({raiz}))')");
+
                 }
-                else if (tipoMetodo == "Cerrado")
-                {
-                    _calcServices.MetodoCerrado(
-                        txbFuncion.Text,
-                        int.Parse(txbIteraciones.Text),
-                        double.Parse(txbTolerancia.Text),
-                        double.Parse(txbXi.Text),
-                        double.Parse(txbXd.Text),
-                        cbMetodo.Text,
-                        out converge,
-                        out raiz,
-                        out error,
-                        out intervalo,
-                        out iteracionesRealizadas
-                    );
-                }
-                else
-                {
-                    MessageBox.Show("Seleccioná un tipo de método (Abierto o Cerrado)");
-                    return;
-                }
-
-                // Mostrar resultados
-                txbFuncionU.Text = txbFuncion.Text;
-                txbMetodoU.Text = cbMetodo.Text;
-                txbIteracionesU.Text = iteracionesRealizadas.ToString();
-                txbToleranciaU.Text = txbTolerancia.Text;
-
-                txbConverge.Text = converge ? "SI" : "NO";
-                txbRaiz.Text = raiz.ToString();
-                txbError.Text = error.ToString();
-                txbIntervaloU.Text = intervalo;
-
-                webView21.ExecuteScriptAsync("ggbApplet.reset()");
-
-                webView21.ExecuteScriptAsync($"ggbApplet.evalCommand('f(x) = {txbFuncion.Text}')");
-
-                webView21.ExecuteScriptAsync($"ggbApplet.evalCommand('A = ({raiz}, f({raiz}))')");
-
             }
             catch (Exception ex)
             {
@@ -108,6 +108,7 @@ namespace FrmCalculadora
 
         }
 
+
         private async void Form1_Load(object sender, EventArgs e)
         {
             await webView21.EnsureCoreWebView2Async();
@@ -115,5 +116,31 @@ namespace FrmCalculadora
             string htmlPath = Path.Combine(Application.StartupPath, "geogebra.html");
             webView21.CoreWebView2.Navigate($"file:///{htmlPath}");
         }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+
+            // Fondo blanco
+            g.Clear(Color.White);
+
+            // Franja roja invertida
+            using (Brush rojo = new SolidBrush(Color.FromArgb(200, 0, 0)))
+            {
+                Point[] franja =
+                {
+            new Point(this.Width - 200, 0),
+            new Point(this.Width + 100, 0),
+            new Point(100, this.Height),
+            new Point(-200, this.Height)
+                };
+
+                g.FillPolygon(rojo, franja);
+            }
+        }
+
+
     }
 }
