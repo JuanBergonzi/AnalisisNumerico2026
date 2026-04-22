@@ -1,6 +1,6 @@
 ﻿namespace FrmCalculadora
 {
-    partial class Form1
+    partial class Raices
     {
         /// <summary>
         ///  Required designer variable.

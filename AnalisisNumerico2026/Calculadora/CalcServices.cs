@@ -25,16 +25,20 @@ namespace Logica
             {
                 xr = CalcularXr(calc, metodo, xi, xd);
 
-                if (double.IsNaN(xr))
+                if (double.IsNaN(xr) || double.IsInfinity(xr) || Math.Abs(xr) > 1e6)
+                {
+                    converge = false;
+                    raiz = xi;
+                    intervalo = $"{xi} | {xd}";
+                    iteracionesRealizadas = i;
                     return;
-
-                error = Math.Abs((xr - xrAnterior) / Math.Max(Math.Abs(xr), 1e-10));
+                }
 
                 double fxr = calc.EvaluaFx(xr);
 
                 System.Diagnostics.Debug.WriteLine($"Iter: {i} Error: {error} Tol: {tolerancia}");
 
-                if (Math.Abs(fxr) < tolerancia || error < tolerancia)
+                if (Math.Abs(fxr) < tolerancia && error < tolerancia)
                 {
                     converge = true;
                     raiz = xr;
@@ -64,12 +68,12 @@ namespace Logica
 
         static double CalcularXr(Calculo calc, string metodo, double xi, double xd)
         {
-            if (metodo == "Tangente")
+            if (metodo == "Tangente") //Newton-Raphson
             {
                 double fxi = calc.EvaluaFx(xi);
                 double derivada = calc.Dx(xi);
 
-                if (derivada == 0 || double.IsNaN(derivada))
+                if (Math.Abs(derivada) < 1e-10 || double.IsNaN(derivada))
                     return double.NaN;
 
                 return xi - (fxi / derivada);
@@ -81,7 +85,7 @@ namespace Logica
 
                 double denominador = fxd - fxi;
 
-                if (denominador == 0)
+                if (Math.Abs(denominador) < 1e-10)
                     return double.NaN;
 
                 return (fxd * xi - fxi * xd) / denominador;

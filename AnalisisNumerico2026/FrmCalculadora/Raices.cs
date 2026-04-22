@@ -2,10 +2,10 @@ using Calculus;
 using Logica;
 namespace FrmCalculadora
 {
-    public partial class Form1 : Form
+    public partial class Raices : Form
     {
         ICalcServices _calcServices = new CalcServices();
-        public Form1()
+        public Raices()
         {
             InitializeComponent();
         }
