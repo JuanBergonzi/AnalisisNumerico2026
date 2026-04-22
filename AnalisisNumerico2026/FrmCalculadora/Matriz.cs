@@ -31,31 +31,47 @@ namespace Front
             cbMetodo.Items.Add("Gauss Jordan");
             cbMetodo.Items.Add("Gauss Seidel");
 
+            panelMatriz.AutoScroll = true;
             cbMetodo.SelectedIndex = 0;
         }
 
         private void btnOptimizar_Click(object sender, EventArgs e)
         {
+            panelMatriz.Controls.Clear();
+            panelMatriz.AutoScrollMinSize = new Size(0, 0);
+            panelMatriz.Refresh();
 
             int n = int.Parse(tbFilasCol.Text);
 
             matriz = new int[n, n];
 
             int size = 40;
+            int espacio = 5;
 
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < n; j++)
                 {
                     TextBox txt = new TextBox();
+
                     txt.Width = size;
                     txt.Height = size;
-                    txt.Location = new Point(j * size, i * size);
+                    txt.Location = new Point(
+                        j * (size + espacio),
+                        i * (size + espacio)
+                    );
+
                     txt.Name = "txt_" + i + "_" + j;
+                    txt.TextAlign = HorizontalAlignment.Center;
 
                     panelMatriz.Controls.Add(txt);
                 }
             }
+
+            panelMatriz.AutoScrollMinSize = new Size(
+                n * (size + espacio),
+                n * (size + espacio)
+            );
         }
         private void btnCalcular_Click(object sender, EventArgs e)
         {

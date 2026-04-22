@@ -22,14 +22,12 @@ namespace Front
         {
             Matriz frm = new Matriz();
             frm.Show();
-            this.Hide();
         }
 
         private void btnRaices_Click(object sender, EventArgs e)
         {
             Raices frm = new Raices();
             frm.Show();
-            this.Hide();
         }
     }
 }
