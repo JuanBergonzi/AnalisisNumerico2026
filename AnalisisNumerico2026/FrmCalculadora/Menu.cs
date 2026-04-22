@@ -27,7 +27,7 @@ namespace Front
 
         private void btnRaices_Click(object sender, EventArgs e)
         {
-            Matriz frm = new Matriz();
+            Raices frm = new Raices();
             frm.Show();
             this.Hide();
         }

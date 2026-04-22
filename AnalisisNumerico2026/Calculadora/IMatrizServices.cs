@@ -8,5 +8,7 @@ namespace Logica
 {
     public interface IMatrizServices
     {
+        string GaussJordan(double[,] matriz);
+        string GaussSeidel(double[,] matriz, int iteraciones, double tolerancia);
     }
 }
