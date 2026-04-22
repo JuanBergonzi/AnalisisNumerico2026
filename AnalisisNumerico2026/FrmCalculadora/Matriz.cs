@@ -43,22 +43,31 @@ namespace Front
 
             int n = int.Parse(tbFilasCol.Text);
 
-            matriz = new int[n, n];
+            matriz = new int[n, n+1];
 
-            int size = 40;
+            int ancho = 40;
+            int alto = 30;
             int espacio = 5;
 
             for (int i = 0; i < n; i++)
             {
-                for (int j = 0; j < n; j++)
+                for (int j = 0; j < n + 1; j++)
                 {
                     TextBox txt = new TextBox();
 
-                    txt.Width = size;
-                    txt.Height = size;
+                    txt.Width = ancho;
+                    txt.Height = alto;
+
+                    int posX;
+
+                    if (j == n) // columna resultado separada
+                        posX = j * (ancho + espacio) + 30;
+                    else
+                        posX = j * (ancho + espacio);
+
                     txt.Location = new Point(
-                        j * (size + espacio),
-                        i * (size + espacio)
+                        posX,
+                        i * (alto + espacio)
                     );
 
                     txt.Name = "txt_" + i + "_" + j;
@@ -69,28 +78,45 @@ namespace Front
             }
 
             panelMatriz.AutoScrollMinSize = new Size(
-                n * (size + espacio),
-                n * (size + espacio)
+                (n + 1) * (ancho + espacio) + 40,
+                n * (alto + espacio)
             );
         }
         private void btnCalcular_Click(object sender, EventArgs e)
         {
             int n = int.Parse(tbFilasCol.Text);
 
+            double[,] datos = new double[n, n + 1];
+
             for (int i = 0; i < n; i++)
             {
-                for (int j = 0; j < n; j++)
+                for (int j = 0; j < n + 1; j++)
                 {
                     TextBox txt = (TextBox)panelMatriz.Controls["txt_" + i + "_" + j];
 
-                    int valor = 0;
-                    int.TryParse(txt.Text, out valor);
+                    double valor = 0;
+                    double.TryParse(txt.Text, out valor);
 
-                    matriz[i, j] = valor;
+                    datos[i, j] = valor;
                 }
             }
 
-            MessageBox.Show("Matriz cargada correctamente");
+            string metodo = cbMetodo.Text;
+            string resultado = "";
+
+            if (metodo == "Gauss Jordan")
+            {
+                resultado = matrizServices.GaussJordan(datos);
+            }
+            else if (metodo == "Gauss Seidel")
+            {
+                int iteraciones = int.Parse(tbIteraciones.Text);
+                double tolerancia = double.Parse(tbTolerancia.Text);
+
+                resultado = matrizServices.GaussSeidel(datos, iteraciones, tolerancia);
+            }
+
+            MessageBox.Show(resultado);
         }
     }
 }
