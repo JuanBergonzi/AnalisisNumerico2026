@@ -43,6 +43,11 @@
             tbIteraciones = new TextBox();
             label9 = new Label();
             cbMetodo = new ComboBox();
+            dataGridView1 = new DataGridView();
+            X = new DataGridViewTextBoxColumn();
+            Column1 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -101,7 +106,7 @@
             // 
             // btnCalcular
             // 
-            btnCalcular.Location = new Point(30, 531);
+            btnCalcular.Location = new Point(180, 574);
             btnCalcular.Name = "btnCalcular";
             btnCalcular.Size = new Size(425, 29);
             btnCalcular.TabIndex = 20;
@@ -111,7 +116,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(319, 424);
+            label6.Location = new Point(469, 467);
             label6.Name = "label6";
             label6.Size = new Size(19, 20);
             label6.TabIndex = 7;
@@ -120,7 +125,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(319, 461);
+            label7.Location = new Point(469, 504);
             label7.Name = "label7";
             label7.Size = new Size(19, 20);
             label7.TabIndex = 8;
@@ -129,7 +134,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(319, 495);
+            label8.Location = new Point(469, 538);
             label8.Name = "label8";
             label8.Size = new Size(19, 20);
             label8.TabIndex = 9;
@@ -174,11 +179,43 @@
             cbMetodo.Size = new Size(203, 28);
             cbMetodo.TabIndex = 22;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { X, Column1, Column2 });
+            dataGridView1.Location = new Point(26, 431);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(429, 128);
+            dataGridView1.TabIndex = 23;
+            // 
+            // X
+            // 
+            X.HeaderText = "X";
+            X.MinimumWidth = 6;
+            X.Name = "X";
+            X.Width = 125;
+            // 
+            // Column1
+            // 
+            Column1.HeaderText = "Y";
+            Column1.MinimumWidth = 6;
+            Column1.Name = "Column1";
+            Column1.Width = 125;
+            // 
+            // Column2
+            // 
+            Column2.HeaderText = "Z";
+            Column2.MinimumWidth = 6;
+            Column2.Name = "Column2";
+            Column2.Width = 125;
+            // 
             // Matriz
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 631);
+            ClientSize = new Size(800, 841);
+            Controls.Add(dataGridView1);
             Controls.Add(cbMetodo);
             Controls.Add(label9);
             Controls.Add(tbIteraciones);
@@ -196,6 +233,7 @@
             Controls.Add(label1);
             Name = "Matriz";
             Text = "Matriz";
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -217,5 +255,9 @@
         private TextBox tbIteraciones;
         private Label label9;
         private ComboBox cbMetodo;
+        private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn X;
+        private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Column2;
     }
 }
