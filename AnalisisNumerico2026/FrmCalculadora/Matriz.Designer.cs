@@ -41,12 +41,14 @@
             tbFilasCol = new TextBox();
             tbTolerancia = new TextBox();
             tbIteraciones = new TextBox();
+            label9 = new Label();
+            cbMetodo = new ComboBox();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 22);
+            label1.Location = new Point(12, 9);
             label1.Name = "label1";
             label1.Size = new Size(159, 20);
             label1.TabIndex = 0;
@@ -55,7 +57,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(30, 268);
+            label2.Location = new Point(30, 390);
             label2.Name = "label2";
             label2.Size = new Size(51, 20);
             label2.TabIndex = 1;
@@ -64,7 +66,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(252, 178);
+            label3.Location = new Point(252, 300);
             label3.Name = "label3";
             label3.Size = new Size(81, 20);
             label3.TabIndex = 2;
@@ -73,7 +75,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(30, 178);
+            label4.Location = new Point(30, 300);
             label4.Name = "label4";
             label4.Size = new Size(77, 20);
             label4.TabIndex = 3;
@@ -82,7 +84,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(30, 84);
+            label5.Location = new Point(30, 206);
             label5.Name = "label5";
             label5.Size = new Size(203, 20);
             label5.TabIndex = 4;
@@ -90,7 +92,7 @@
             // 
             // btnOptimizar
             // 
-            btnOptimizar.Location = new Point(361, 120);
+            btnOptimizar.Location = new Point(252, 244);
             btnOptimizar.Name = "btnOptimizar";
             btnOptimizar.Size = new Size(94, 29);
             btnOptimizar.TabIndex = 2;
@@ -99,7 +101,7 @@
             // 
             // btnCalcular
             // 
-            btnCalcular.Location = new Point(30, 409);
+            btnCalcular.Location = new Point(30, 531);
             btnCalcular.Name = "btnCalcular";
             btnCalcular.Size = new Size(425, 29);
             btnCalcular.TabIndex = 20;
@@ -109,7 +111,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(319, 302);
+            label6.Location = new Point(319, 424);
             label6.Name = "label6";
             label6.Size = new Size(19, 20);
             label6.TabIndex = 7;
@@ -118,7 +120,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(319, 339);
+            label7.Location = new Point(319, 461);
             label7.Name = "label7";
             label7.Size = new Size(19, 20);
             label7.TabIndex = 8;
@@ -127,7 +129,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(319, 373);
+            label8.Location = new Point(319, 495);
             label8.Name = "label8";
             label8.Size = new Size(19, 20);
             label8.TabIndex = 9;
@@ -136,30 +138,49 @@
             // 
             // tbFilasCol
             // 
-            tbFilasCol.Location = new Point(30, 122);
+            tbFilasCol.Location = new Point(30, 244);
             tbFilasCol.Name = "tbFilasCol";
-            tbFilasCol.Size = new Size(299, 27);
+            tbFilasCol.Size = new Size(203, 27);
             tbFilasCol.TabIndex = 1;
             // 
             // tbTolerancia
             // 
-            tbTolerancia.Location = new Point(30, 212);
+            tbTolerancia.Location = new Point(30, 334);
             tbTolerancia.Name = "tbTolerancia";
             tbTolerancia.Size = new Size(203, 27);
             tbTolerancia.TabIndex = 3;
             // 
             // tbIteraciones
             // 
-            tbIteraciones.Location = new Point(252, 212);
+            tbIteraciones.Location = new Point(252, 334);
             tbIteraciones.Name = "tbIteraciones";
             tbIteraciones.Size = new Size(203, 27);
             tbIteraciones.TabIndex = 4;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(30, 124);
+            label9.Name = "label9";
+            label9.Size = new Size(160, 20);
+            label9.TabIndex = 21;
+            label9.Text = "Selecciona un metodo:";
+            // 
+            // cbMetodo
+            // 
+            cbMetodo.FormattingEnabled = true;
+            cbMetodo.Location = new Point(30, 158);
+            cbMetodo.Name = "cbMetodo";
+            cbMetodo.Size = new Size(203, 28);
+            cbMetodo.TabIndex = 22;
             // 
             // Matriz
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 631);
+            Controls.Add(cbMetodo);
+            Controls.Add(label9);
             Controls.Add(tbIteraciones);
             Controls.Add(tbTolerancia);
             Controls.Add(tbFilasCol);
@@ -194,5 +215,7 @@
         private TextBox tbFilasCol;
         private TextBox tbTolerancia;
         private TextBox tbIteraciones;
+        private Label label9;
+        private ComboBox cbMetodo;
     }
 }

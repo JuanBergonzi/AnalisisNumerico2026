@@ -20,12 +20,16 @@ namespace Front
 
         private void btnMatriz_Click(object sender, EventArgs e)
         {
-
+            Matriz frm = new Matriz();
+            frm.Show();
+            this.Hide();
         }
 
         private void btnRaices_Click(object sender, EventArgs e)
         {
-
+            Matriz frm = new Matriz();
+            frm.Show();
+            this.Hide();
         }
     }
 }
