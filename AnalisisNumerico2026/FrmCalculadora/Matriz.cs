@@ -43,11 +43,12 @@ namespace Front
 
             int n = int.Parse(tbFilasCol.Text);
 
-            matriz = new int[n, n+1];
+            matriz = new int[n, n + 1];
 
             int ancho = 40;
             int alto = 30;
             int espacio = 5;
+
 
             for (int i = 0; i < n; i++)
             {
@@ -59,7 +60,16 @@ namespace Front
                     txt.Height = alto;
 
                     int posX;
+                    Label igual = new Label();
+                    igual.Text = "=";
+                    igual.AutoSize = true;
 
+                    igual.Location = new Point(
+                        n * (ancho + espacio) + 10,
+                        i * (alto + espacio) + 5
+                    );
+
+                    panelMatriz.Controls.Add(igual);
                     if (j == n) // columna resultado separada
                         posX = j * (ancho + espacio) + 30;
                     else
@@ -84,7 +94,7 @@ namespace Front
         }
         private void btnCalcular_Click(object sender, EventArgs e)
         {
-            int n = int.Parse(tbFilasCol.Text);
+            int n = (int)tbFilasCol.Value;
 
             double[,] datos = new double[n, n + 1];
 
@@ -108,7 +118,7 @@ namespace Front
             {
                 resultado = matrizServices.GaussJordan(datos);
             }
-            else if (metodo == "Gauss Seidel")
+            else
             {
                 int iteraciones = int.Parse(tbIteraciones.Text);
                 double tolerancia = double.Parse(tbTolerancia.Text);
@@ -116,7 +126,109 @@ namespace Front
                 resultado = matrizServices.GaussSeidel(datos, iteraciones, tolerancia);
             }
 
-            MessageBox.Show(resultado);
+            var resultadosViejos = panelMatriz.Controls
+                .OfType<Label>()
+                .Where(l => l.Name.StartsWith("res_"))
+                .ToList();
+
+            foreach (var l in resultadosViejos)
+                panelMatriz.Controls.Remove(l);
+
+            string[] lineas = resultado.Split('\n');
+
+            int ancho = 40;
+            int espacio = 5;
+
+            for (int i = 0; i < n; i++)
+            {
+                if (i >= lineas.Length) break;
+
+                string linea = lineas[i];
+                if (string.IsNullOrWhiteSpace(linea)) continue;
+
+                string[] partes = linea.Split('=');
+
+                if (partes.Length == 2)
+                {
+                    Label lbl = new Label();
+
+                    lbl.Name = "res_" + i;
+                    lbl.Text = partes[0] + "= " + partes[1];
+                    lbl.AutoSize = true;
+                    lbl.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+                    lbl.Location = new Point(
+                        n * (ancho + espacio) + 120,
+                        i * (30 + espacio) + 5
+                    );
+
+                    panelMatriz.Controls.Add(lbl);
+                }
+            }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            foreach (Control c in panelMatriz.Controls)
+            {
+                if (c is TextBox txt)
+                    txt.Text = "";
+            }
+
+            var resultados = panelMatriz.Controls
+                .OfType<Label>()
+                .Where(l => l.Name.StartsWith("res_"))
+                .ToList();
+
+            foreach (var l in resultados)
+                panelMatriz.Controls.Remove(l);
+
+
+        }
+
+        private void btnRedondearMatriz_Click(object sender, EventArgs e)
+        {
+            int decimales = 2;
+            int.TryParse(tbDecimalesMatriz.Text, out decimales);
+
+            foreach (Control c in panelMatriz.Controls)
+            {
+                if (c is TextBox txt)
+                {
+                    double valor;
+                    if (double.TryParse(txt.Text, out valor))
+                    {
+                        valor = Math.Round(valor, decimales);
+                        txt.Text = valor.ToString();
+                    }
+                }
+            }
+
+        }
+
+        private void btnRedondearResultados_Click(object sender, EventArgs e)
+        {
+            int decimales = 2;
+            int.TryParse(tbDecimalesResultados.Text, out decimales);
+
+            foreach (Control c in panelMatriz.Controls)
+            {
+                if (c is Label lbl && lbl.Name.StartsWith("res_"))
+                {
+                    string[] partes = lbl.Text.Split('=');
+
+                    if (partes.Length == 2)
+                    {
+                        double valor;
+                        if (double.TryParse(partes[1], out valor))
+                        {
+                            valor = Math.Round(valor, decimales);
+                            lbl.Text = partes[0] + "= " + valor;
+                        }
+                    }
+                }
+            }
+
         }
     }
 }
