@@ -40,6 +40,18 @@ bld/
 # Visual Studio 2017 auto generated files
 Generated\ Files/
 
+# Cache
+*.cache
+.cache/
+**/.cache/
+
+# Json
+*.json
+
+# Visual Studio
+*.suo
+*.cs
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
