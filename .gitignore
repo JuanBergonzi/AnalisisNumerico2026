@@ -430,3 +430,11 @@ FodyWeavers.xsd
 *.db
 .vs/
 Publish/
+
+# Ignorar carpetas .cache
+.cache/
+**/.cache/
+
+# Ignorar archivos json
+*.json
+**/*.json
