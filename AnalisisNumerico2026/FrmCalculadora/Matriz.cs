@@ -230,5 +230,18 @@ namespace Front
             }
 
         }
+
+        private void cbMetodo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string metodo = cbMetodo.Text;
+
+            bool esSeidel = metodo == "Gauss Seidel";
+
+            tbIteraciones.Visible = esSeidel;
+            tbTolerancia.Visible = esSeidel;
+            label3.Visible = esSeidel; 
+            label4.Visible = esSeidel; 
+
+        }
     }
 }

@@ -134,6 +134,7 @@
             tbIteraciones.Name = "tbIteraciones";
             tbIteraciones.Size = new Size(178, 23);
             tbIteraciones.TabIndex = 4;
+            tbIteraciones.Text = "100";
             // 
             // label9
             // 
@@ -146,12 +147,14 @@
             // 
             // cbMetodo
             // 
+            cbMetodo.DropDownStyle = ComboBoxStyle.DropDownList;
             cbMetodo.FormattingEnabled = true;
             cbMetodo.Location = new Point(26, 118);
             cbMetodo.Margin = new Padding(3, 2, 3, 2);
             cbMetodo.Name = "cbMetodo";
             cbMetodo.Size = new Size(178, 23);
             cbMetodo.TabIndex = 22;
+            cbMetodo.SelectedIndexChanged += cbMetodo_SelectedIndexChanged;
             // 
             // panelMatriz
             // 
@@ -203,6 +206,7 @@
             tbDecimalesMatriz.Name = "tbDecimalesMatriz";
             tbDecimalesMatriz.Size = new Size(36, 23);
             tbDecimalesMatriz.TabIndex = 28;
+            tbDecimalesMatriz.Value = new decimal(new int[] { 2, 0, 0, 0 });
             // 
             // tbDecimalesResultados
             // 
