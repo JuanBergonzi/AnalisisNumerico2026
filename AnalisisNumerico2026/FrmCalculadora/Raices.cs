@@ -1,0 +1,116 @@
+using Calculus;
+using Logica;
+namespace FrmCalculadora
+{
+    public partial class Raices : Form
+    {
+        ICalcServices _calcServices = new CalcServices();
+        public Raices()
+        {
+            InitializeComponent();
+        }
+
+        private void btnCalcular_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                bool converge;
+                double raiz;
+                double error;
+                string intervalo;
+                int iteracionesRealizadas;
+
+                string tipoMetodo = cmMet.Text; // "Abierto" o "Cerrado"
+
+                if (tipoMetodo == "Abierto")
+                {
+                    _calcServices.MetodoAbierto(
+                        txbFuncion.Text,
+                        int.Parse(txbIteraciones.Text),
+                        double.Parse(txbTolerancia.Text),
+                        double.Parse(txbXi.Text),
+                        double.Parse(txbXd.Text),
+                        cbMetodo.Text,
+                        out converge,
+                        out raiz,
+                        out error,
+                        out intervalo,
+                        out iteracionesRealizadas
+                    );
+                }
+                else if (tipoMetodo == "Cerrado")
+                {
+                    _calcServices.MetodoCerrado(
+                        txbFuncion.Text,
+                        int.Parse(txbIteraciones.Text),
+                        double.Parse(txbTolerancia.Text),
+                        double.Parse(txbXi.Text),
+                        double.Parse(txbXd.Text),
+                        cbMetodo.Text,
+                        out converge,
+                        out raiz,
+                        out error,
+                        out intervalo,
+                        out iteracionesRealizadas
+                    );
+                }
+                else
+                {
+                    MessageBox.Show("Seleccioná un tipo de método (Abierto o Cerrado)");
+                    return;
+                }
+
+                // Mostrar resultados
+                txbIteracionesU.Text = iteracionesRealizadas.ToString();
+
+                txbConverge.Text = converge ? "SI" : "NO";
+                txbRaiz.Text = raiz.ToString();
+                txbError.Text = error.ToString();
+                txbIntervaloU.Text = intervalo;
+
+                webView21.ExecuteScriptAsync("ggbApplet.reset()");
+
+                webView21.ExecuteScriptAsync($"ggbApplet.evalCommand('f(x) = {txbFuncion.Text}')");
+
+                webView21.ExecuteScriptAsync($"ggbApplet.evalCommand('A = ({raiz}, f({raiz}))')");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void cmMet_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbMetodo.Items.Clear();
+
+            string tipoMetodo = cmMet.SelectedItem?.ToString();
+
+            if (tipoMetodo == "Cerrado")
+            {
+                cbMetodo.Items.Add("Bisección");
+                cbMetodo.Items.Add("Regla Falsa");
+            }
+            else if (tipoMetodo == "Abierto")
+            {
+                cbMetodo.Items.Add("Tangente");
+                cbMetodo.Items.Add("Secante");
+            }
+
+            // Selecciona el primero automáticamente (opcional pero recomendable)
+            if (cbMetodo.Items.Count > 0)
+                cbMetodo.SelectedIndex = 0;
+
+
+        }
+
+        private async void Form1_Load(object sender, EventArgs e)
+        {
+            await webView21.EnsureCoreWebView2Async();
+
+            string htmlPath = Path.Combine(Application.StartupPath, "geogebra.html");
+            webView21.CoreWebView2.Navigate($"file:///{htmlPath}");
+        }
+    }
+}

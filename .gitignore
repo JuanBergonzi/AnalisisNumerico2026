@@ -1,0 +1,25 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+
+# Cache / temporales
+*.cache
+*.log
+*.tmp
+
+# Solo JSON temporales de Visual Studio
+.vs/**/*.json
+
+# NO ignores .cs globalmente (son tu código)
+# NO ignores .json globalmente (pueden ser configs reales)

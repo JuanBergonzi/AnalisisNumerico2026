@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="geogebra.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="geogebra.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3912.50" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Calculadora\Logica.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Calculus">
+      <HintPath>..\..\Calculus-C-dll-and-Java-Android--master\Calculus-C-dll-and-Java-Android--master\Calculus.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,33 @@
+﻿using FrmCalculadora;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Front
+{
+    public partial class Menu : Form
+    {
+        public Menu()
+        {
+            InitializeComponent();
+        }
+
+        private void btnMatriz_Click(object sender, EventArgs e)
+        {
+            Matriz frm = new Matriz();
+            frm.Show();
+        }
+
+        private void btnRaices_Click(object sender, EventArgs e)
+        {
+            Raices frm = new Raices();
+            frm.Show();
+        }
+    }
+}
