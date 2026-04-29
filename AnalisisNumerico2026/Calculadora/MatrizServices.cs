@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Logica
 {
@@ -15,7 +11,33 @@ namespace Logica
 
             for (int i = 0; i < n; i++)
             {
+                if (matriz[i, i] == 0)
+                {
+                    bool cambio = false;
+
+                    for (int k = i + 1; k < n; k++)
+                    {
+                        if (matriz[k, i] != 0)
+                        {
+                            for (int j = 0; j < m; j++)
+                            {
+                                double temp = matriz[i, j];
+                                matriz[i, j] = matriz[k, j];
+                                matriz[k, j] = temp;
+                            }
+                            cambio = true;
+                            break;
+                        }
+                    }
+
+                    if (!cambio)
+                        return "Error: no se pudo encontrar un pivote distinto de 0.";
+                }
+
                 double pivote = matriz[i, i];
+
+                if (pivote == 0)
+                    return "Error: pivote 0, no se puede continuar.";
 
                 for (int j = 0; j < m; j++)
                     matriz[i, j] /= pivote;
@@ -35,7 +57,7 @@ namespace Logica
             string r = "";
 
             for (int i = 0; i < n; i++)
-                r += "X" + (i + 1) + " = " + matriz[i, m - 1] + "\n";
+                r += $"X{i + 1} = {matriz[i, m - 1]:F6}\n";
 
             return r;
         }
@@ -47,6 +69,12 @@ namespace Logica
 
             double[] x = new double[n];
             double[] anterior = new double[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                if (matriz[i, i] == 0)
+                    return "Error: hay ceros en la diagonal. Reordenar el sistema o usar otro método.";
+            }
 
             for (int it = 0; it < iteraciones; it++)
             {
@@ -71,13 +99,20 @@ namespace Logica
                     error = Math.Max(error, Math.Abs(x[i] - anterior[i]));
 
                 if (error < tolerancia)
-                    break;
+                {
+                    return ArmarResultado(x) + $"\nConvergió en {it + 1} iteraciones (error < {tolerancia})";
+                }
             }
 
+            return ArmarResultado(x) + "\nNo se alcanzó la tolerancia.";
+        }
+
+        private string ArmarResultado(double[] x)
+        {
             string r = "";
 
-            for (int i = 0; i < n; i++)
-                r += "X" + (i + 1) + " = " + x[i] + "\n";
+            for (int i = 0; i < x.Length; i++)
+                r += $"X{i + 1} = {x[i]:F6}\n";
 
             return r;
         }
