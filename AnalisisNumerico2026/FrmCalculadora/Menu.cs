@@ -29,5 +29,11 @@ namespace Front
             Raices frm = new Raices();
             frm.Show();
         }
+
+        private void btnRegresion_Click(object sender, EventArgs e)
+        {
+            Regresion frm = new Regresion();
+            frm.Show();
+        }
     }
 }
