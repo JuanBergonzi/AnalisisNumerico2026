@@ -30,10 +30,23 @@ namespace Front
             frm.Show();
         }
 
+<<<<<<< HEAD
         private void btnRegresion_Click(object sender, EventArgs e)
         {
             Regresion frm = new Regresion();
             frm.Show();
         }
+=======
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Integracion frm = new Integracion();
+            frm.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+>>>>>>> Trapecios
     }
 }
