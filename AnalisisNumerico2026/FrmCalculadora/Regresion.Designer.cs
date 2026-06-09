@@ -152,6 +152,29 @@
             webView21.Size = new Size(500, 350);
             webView21.ZoomFactor = 1D;
 
+            // cbMetodo
+            cbMetodo = new ComboBox();
+            cbMetodo.Location = new Point(20, 460);
+            cbMetodo.Size = new Size(180, 23);
+            cbMetodo.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            cbMetodo.Items.Add("Regresión Lineal");
+            cbMetodo.Items.Add("Regresión Polinómica");
+            cbMetodo.SelectedIndex = 0;
+
+            // labelGrado
+            labelGrado = new Label();
+            labelGrado.Location = new Point(220, 463);
+            labelGrado.Text = "Grado";
+            labelGrado.AutoSize = true;
+
+            // nudGrado
+            nudGrado = new NumericUpDown();
+            nudGrado.Location = new Point(270, 460);
+            nudGrado.Minimum = 2;
+            nudGrado.Maximum = 10;
+            nudGrado.Value = 2;
+
             // Regresion
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -179,6 +202,10 @@
             Controls.Add(lblAceptable);
 
             Controls.Add(webView21);
+
+            Controls.Add(cbMetodo);
+            Controls.Add(labelGrado);
+            Controls.Add(nudGrado);
 
             Name = "Regresion";
             Text = "Regresión Lineal";
@@ -215,5 +242,9 @@
         private Label lblAceptable;
 
         private Microsoft.Web.WebView2.WinForms.WebView2 webView21;
+
+        private ComboBox cbMetodo;
+        private NumericUpDown nudGrado;
+        private Label labelGrado;
     }
 }

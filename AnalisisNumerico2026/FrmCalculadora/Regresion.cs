@@ -81,8 +81,7 @@ namespace Front
             {
                 int cantidad = (int)tbCantidadPuntos.Value;
 
-                List<double[]> puntos =
-                    new List<double[]>();
+                List<double[]> puntos = new List<double[]>();
 
                 for (int i = 0; i < cantidad; i++)
                 {
@@ -99,49 +98,134 @@ namespace Front
                     });
                 }
 
-                double a0;
-                double a1;
-                double r;
-                bool aceptable;
-
-                regresionServices.RegresionLineal(
-                    puntos,
-                    double.Parse(tbTolerancia.Text),
-                    out a0,
-                    out a1,
-                    out r,
-                    out aceptable
-                );
-
-                lblFuncion.Text =
-                    $"y = {a1:F6}x + {a0:F6}";
-
-                lblR.Text =
-                    r.ToString("F6");
-
-                lblAceptable.Text =
-                    aceptable ? "SI" : "NO";
-
                 webView21.ExecuteScriptAsync(
                     "ggbApplet.reset()"
                 );
 
-                for (int i = 0; i < puntos.Count; i++)
+                foreach (var p in puntos)
                 {
                     webView21.ExecuteScriptAsync(
-                        $"ggbApplet.evalCommand('P{i}=({puntos[i][0]},{puntos[i][1]})')"
+                        $"ggbApplet.evalCommand('({p[0].ToString(CultureInfo.InvariantCulture)},{p[1].ToString(CultureInfo.InvariantCulture)})')"
                     );
                 }
 
-                string pendiente =
-                    a1.ToString(CultureInfo.InvariantCulture);
+                if (cbMetodo.Text == "Regresión Lineal")
+                {
+                    double a0;
+                    double a1;
+                    double r;
+                    bool aceptable;
 
-                string ordenada =
-                    a0.ToString(CultureInfo.InvariantCulture);
+                    regresionServices.RegresionLineal(
+                        puntos,
+                        double.Parse(tbTolerancia.Text),
+                        out a0,
+                        out a1,
+                        out r,
+                        out aceptable
+                    );
 
-                webView21.ExecuteScriptAsync(
-                    $"ggbApplet.evalCommand('f(x)={pendiente}*x+({ordenada})')"
-                                );
+                    lblFuncion.Text =
+                        $"y = {a1:F6}x + {a0:F6}";
+
+                    lblR.Text =
+                        (r * 100).ToString("F2") + "%";
+
+                    lblAceptable.Text =
+                        aceptable ? "SI" : "NO";
+
+                    string pendiente =
+                        a1.ToString(
+                            CultureInfo.InvariantCulture
+                        );
+
+                    string ordenada =
+                        a0.ToString(
+                            CultureInfo.InvariantCulture
+                        );
+
+                    webView21.ExecuteScriptAsync(
+                        $"ggbApplet.evalCommand('f(x)={pendiente}*x+({ordenada})')"
+                    );
+                }
+                else
+                {
+                    double[] coeficientes;
+                    double r;
+                    bool aceptable;
+
+                    regresionServices.RegresionPolinomica(
+                        puntos,
+                        (int)nudGrado.Value,
+                        double.Parse(tbTolerancia.Text),
+                        out coeficientes,
+                        out r,
+                        out aceptable
+                    );
+
+                    string funcion = "y = ";
+
+                    for (int i = coeficientes.Length - 1;
+                         i >= 0;
+                         i--)
+                    {
+                        if (i == 0)
+                        {
+                            funcion +=
+                                $"{coeficientes[i]:F4}";
+                        }
+                        else if (i == 1)
+                        {
+                            funcion +=
+                                $"{coeficientes[i]:F4}x + ";
+                        }
+                        else
+                        {
+                            funcion +=
+                                $"{coeficientes[i]:F4}x^{i} + ";
+                        }
+                    }
+
+                    lblFuncion.Text = funcion;
+
+                    lblR.Text =
+                        (r * 100).ToString("F2") + "%";
+
+                    lblAceptable.Text =
+                        aceptable ? "SI" : "NO";
+
+                    string funcionGeoGebra = "";
+
+                    for (int i = coeficientes.Length - 1;
+                         i >= 0;
+                         i--)
+                    {
+                        string coef =
+                            coeficientes[i]
+                            .ToString(
+                                CultureInfo.InvariantCulture
+                            );
+
+                        if (i == 0)
+                        {
+                            funcionGeoGebra += coef;
+                        }
+                        else if (i == 1)
+                        {
+                            funcionGeoGebra +=
+                                coef + "*x+";
+                        }
+                        else
+                        {
+                            funcionGeoGebra +=
+                                coef + "*x^" + i + "+";
+                        }
+                    }
+
+                    webView21.ExecuteScriptAsync(
+                        $"ggbApplet.evalCommand('f(x)={funcionGeoGebra}')"
+                    );
+                }
             }
             catch (Exception ex)
             {
