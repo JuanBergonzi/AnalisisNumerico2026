@@ -1,12 +1,7 @@
 ﻿using Logica;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Front
@@ -14,9 +9,11 @@ namespace Front
     public partial class Integracion : Form
     {
         private readonly IIntegracionServices integracionServices;
+
         public Integracion()
         {
             InitializeComponent();
+
             integracionServices = new IntegracionServices();
 
             cbMetodos.Items.Add("Trapecios Simple");
@@ -27,6 +24,23 @@ namespace Front
             cbMetodos.Items.Add("Simpson Combinado");
 
             cbMetodos.SelectedIndex = 0;
+
+            Load += Integracion_Load;
+        }
+
+        private async void Integracion_Load(object sender, EventArgs e)
+        {
+            await webView21.EnsureCoreWebView2Async();
+
+            string htmlPath =
+                Path.Combine(
+                    Application.StartupPath,
+                    "geogebra.html"
+                );
+
+            webView21.CoreWebView2.Navigate(
+                $"file:///{htmlPath}"
+            );
         }
 
         private void btnCalcular_Click(object sender, EventArgs e)
@@ -44,7 +58,11 @@ namespace Front
                 {
                     case "Trapecios Simple":
                         resultado = integracionServices
-                            .CalcularIntegralTrapeciosSimple(funcion, xi, xd);
+                            .CalcularIntegralTrapeciosSimple(
+                                funcion,
+                                xi,
+                                xd
+                            );
                         break;
 
                     case "Trapecios Multiple":
@@ -53,12 +71,17 @@ namespace Front
                                 funcion,
                                 xi,
                                 xd,
-                                Convert.ToInt32(TxtN.Text));
+                                Convert.ToInt32(TxtN.Text)
+                            );
                         break;
 
                     case "Simpson 1/3 Simple":
                         resultado = integracionServices
-                            .CalcularIntegralSimpson13Simple(funcion, xi, xd);
+                            .CalcularIntegralSimpson13Simple(
+                                funcion,
+                                xi,
+                                xd
+                            );
                         break;
 
                     case "Simpson 1/3 Multiple":
@@ -67,12 +90,17 @@ namespace Front
                                 funcion,
                                 xi,
                                 xd,
-                                Convert.ToInt32(TxtN.Text));
+                                Convert.ToInt32(TxtN.Text)
+                            );
                         break;
 
                     case "Simpson 3/8":
                         resultado = integracionServices
-                            .CalcularIntegralSimpson38(funcion, xi, xd);
+                            .CalcularIntegralSimpson38(
+                                funcion,
+                                xi,
+                                xd
+                            );
                         break;
 
                     case "Simpson Combinado":
@@ -81,15 +109,71 @@ namespace Front
                                 funcion,
                                 xi,
                                 xd,
-                                Convert.ToInt32(TxtN.Text));
+                                Convert.ToInt32(TxtN.Text)
+                            );
                         break;
                 }
 
                 txtResultado.Text = resultado.ToString("F6");
+
+                DibujarEnGeoGebra(funcion, xi, xd);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void DibujarEnGeoGebra(
+            string funcion,
+            double xi,
+            double xd)
+        {
+            try
+            {
+                string funcionGeoGebra = funcion
+                    .Replace(",", ".");
+
+                string xiStr =
+                    xi.ToString(
+                        CultureInfo.InvariantCulture
+                    );
+
+                string xdStr =
+                    xd.ToString(
+                        CultureInfo.InvariantCulture
+                    );
+
+                webView21.ExecuteScriptAsync(
+                    "ggbApplet.reset()"
+                );
+
+                webView21.ExecuteScriptAsync(
+                    $"ggbApplet.evalCommand('f(x)={funcionGeoGebra}')"
+                );
+
+                webView21.ExecuteScriptAsync(
+                    $"ggbApplet.evalCommand('A=({xiStr},0)')"
+                );
+
+                webView21.ExecuteScriptAsync(
+                    $"ggbApplet.evalCommand('B=({xdStr},0)')"
+                );
+
+                webView21.ExecuteScriptAsync(
+                    $"ggbApplet.evalCommand('Integral(f,{xiStr},{xdStr})')"
+                );
+
+                webView21.ExecuteScriptAsync(
+                    "ggbApplet.setAxesVisible(true,true)"
+                );
+
+                webView21.ExecuteScriptAsync(
+                    "ggbApplet.setGridVisible(true)"
+                );
+            }
+            catch
+            {
             }
         }
     }
